@@ -4,11 +4,11 @@ var saveBtn1 = document.getElementById("saveBtn1");
 var saveBtn2 = document.getElementById("saveBtn2");
 var saveBtn3 = document.getElementById("saveBtn3");
 var saveBtn4 = document.getElementById("saveBtn4");
-// var saveBtn5 = document.getElementById("saveBtn5");
-// var saveBtn6 = document.getElementById("saveBtn6");
-// var saveBtn7 = document.getElementById("saveBtn7");
-// var saveBtn8 = document.getElementById("saveBtn8");
-// var saveBtn9 = document.getElementById("saveBtn9");
+var saveBtn5 = document.getElementById("saveBtn5");
+var saveBtn6 = document.getElementById("saveBtn6");
+var saveBtn7 = document.getElementById("saveBtn7");
+var saveBtn8 = document.getElementById("saveBtn8");
+var saveBtn9 = document.getElementById("saveBtn9");
 
 $(".row").on("click", "p", function(){
     var text = $(this).text().trim();
@@ -29,17 +29,27 @@ function saveTask(){
     hour = hour.replace("saveBtn", "")
     hour = "input" + hour
     hourInput = document.getElementById(hour);
-    console.log(hour);
+    localStorage.setItem(hourInput.id, hourInput.textContent)
+
+}
+
+function loadTasks(){
+    for (var i = 1; i < 10; i++){
+        var item = "input" + i;
+        tasks = localStorage.getItem(item);
+        pEl = document.getElementById("input" + i);
+        pEl.textContent = tasks;
+    }
 }
 
 saveBtn1.addEventListener("click", saveTask);
 saveBtn2.addEventListener("click", saveTask);
 saveBtn3.addEventListener("click", saveTask);
 saveBtn4.addEventListener("click", saveTask);
-// saveBtn5.addEventListener("click", saveTask);
-// saveBtn6.addEventListener("click", saveTask);
-// saveBtn7.addEventListener("click", saveTask);
-// saveBtn8.addEventListener("click", saveTask);
-// saveBtn9.addEventListener("click", saveTask);
+saveBtn5.addEventListener("click", saveTask);
+saveBtn6.addEventListener("click", saveTask);
+saveBtn7.addEventListener("click", saveTask);
+saveBtn8.addEventListener("click", saveTask);
+saveBtn9.addEventListener("click", saveTask);
 
-// loadTasks();
+loadTasks();
