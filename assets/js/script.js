@@ -12,14 +12,16 @@ var saveBtn17 = document.getElementById("saveBtn17");
 
 $(".row").on("click", "p", function(){
     var text = $(this).text().trim();
-    var textInput = $("<textarea>").addClass("col-10").val(text);
+    classes = this.classList.value
+    var textInput = $("<textarea>").addClass(classes).val(text);
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
     $(textInput).attr("id", '' + this.id);
 })
 $(".row").on("blur", "textarea", function(){
     var text = $(this).val().trim();
-    var taskP = $("<p>").addClass("col-10").text(text);
+    classes = this.classList.value;
+    var taskP = $("<p>").addClass(classes).text(text);
     $(taskP).attr("id", "" + this.id);
     $(this).replaceWith(taskP);
 })
@@ -40,13 +42,11 @@ function loadTasks(){
         pEl = document.getElementById("input" + i);
         pEl.textContent = tasks;
     }
-    auditTask();
 }
 
 function auditTask(){
-    // var current = new Date();
-    // var currentHour = current.getHours();
-    var currentHour = 13;
+    var current = new Date();
+    var currentHour = current.getHours();
     for (var i = 9; i < 18; i++){
         inputEl = document.querySelector("#input" + i);
         var elHour = inputEl.id;
@@ -76,7 +76,6 @@ loadTasks();
 
 function updatePage(){
     setInterval(function(){
-        console.log("Morbin time!");
         auditTask();
     }, 1000 * 60 * 10)
 }
