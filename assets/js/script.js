@@ -1,5 +1,7 @@
+//display current day at top of page
 var currentDay = document.getElementById("currentDay");
 currentDay.textContent = moment().format("dddd, MMMM Do");
+//save button elements to attach event listeners to later
 var saveBtn9 = document.getElementById("saveBtn9");
 var saveBtn10 = document.getElementById("saveBtn10");
 var saveBtn11 = document.getElementById("saveBtn11");
@@ -10,6 +12,7 @@ var saveBtn15 = document.getElementById("saveBtn15");
 var saveBtn16 = document.getElementById("saveBtn16");
 var saveBtn17 = document.getElementById("saveBtn17");
 
+//turn p element into textarea element and back again when you click on and off of it
 $(".row").on("click", "p", function(){
     var text = $(this).text().trim();
     classes = this.classList.value
@@ -26,6 +29,7 @@ $(".row").on("blur", "textarea", function(){
     $(this).replaceWith(taskP);
 })
 
+//save tasks for individual hours once individual save buttons are pressed
 function saveTask(){
     var hour = this.id;
     hour = hour.replace("saveBtn", "")
@@ -35,6 +39,7 @@ function saveTask(){
 
 }
 
+//load tasks from local storage on page load
 function loadTasks(){
     for (var i = 9; i < 18; i++){
         var item = "input" + i;
@@ -44,6 +49,7 @@ function loadTasks(){
     }
 }
 
+//check the task hour against the current time to set the background color
 function auditTask(){
     var current = new Date();
     var currentHour = current.getHours();
@@ -62,6 +68,7 @@ function auditTask(){
     }
 }
 
+//event listeners for all save buttons
 saveBtn9.addEventListener("click", saveTask);
 saveBtn10.addEventListener("click", saveTask);
 saveBtn11.addEventListener("click", saveTask);
@@ -72,12 +79,13 @@ saveBtn15.addEventListener("click", saveTask);
 saveBtn16.addEventListener("click", saveTask);
 saveBtn17.addEventListener("click", saveTask);
 
-loadTasks();
 
+//check every ten minutes if the hour has changed to update the background color
 function updatePage(){
     setInterval(function(){
         auditTask();
     }, 1000 * 60 * 10)
 }
+loadTasks();
 auditTask();
 updatePage();
